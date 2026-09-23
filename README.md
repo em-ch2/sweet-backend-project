@@ -10,8 +10,8 @@ python main.py
 To call API endpoints:
 
 Generate a shorten URL using this command in Powershell:
-Invoke-RestMethod ` -Uri "http://127.0.0.1:5000/shorten" ` -Method POST ` -ContentType "application/json" ` -Body '{"url":"https://www.google.com"}'
+Invoke-RestMethod ` -Uri "http://127.0.0.1:5000/shorten" ` -Method POST ` -ContentType "application/json" ` -Body '{"url":"<input url>"}'
 
 Get visiting stats for the link using this command:
 - Replace the code with the one given by API when calling previous command
-Invoke-RestMethod "http://127.0.0.1:5000/aB3x9Q/stats"
+Invoke-RestMethod "http://127.0.0.1:5000/<code>/stats"

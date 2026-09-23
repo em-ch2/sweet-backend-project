@@ -39,21 +39,21 @@ def generate_code():
             (code,)
         )
 
-        result = cursor.fetchone()
+        retrieved_code = cursor.fetchone()
         conn.close()
 
-        if result is None:
+        if retrieved_code is None:
             return code
 
 
 @app.route("/shorten", methods=["POST"])
 def shorten_url():
-    data = request.get_json()
+    userInput = request.get_json()
 
-    if data is None or "url" not in data:
+    if userInput is None or "url" not in userInput:
         return jsonify({"error": "No URL provided"}), 400
 
-    url = data["url"]
+    url = userInput["url"]
 
     if not url.startswith("http://") and not url.startswith("https://"):
         return jsonify({"error": "Invalid URL"}), 400
@@ -89,13 +89,13 @@ def redirect_url(code):
         (code,)
     )
 
-    result = cursor.fetchone()
+    retrieved_url = cursor.fetchone()
 
-    if result is None:
+    if retrieved_url is None:
         conn.close()
         return jsonify({"error": "Code not found"}), 404
 
-    url = result[0]
+    url = retrieved_url[0]
 
     cursor.execute(
         "UPDATE urls SET visits = visits + 1 WHERE code = ?",
@@ -118,14 +118,14 @@ def get_stats(code):
         (code,)
     )
 
-    result = cursor.fetchone()
+    retrieved_stats = cursor.fetchone()
     conn.close()
 
-    if result is None:
+    if retrieved_stats is None:
         return jsonify({"error": "Code not found"}), 404
 
-    url = result[0]
-    visits = result[1]
+    url = retrieved_stats[0]
+    visits = retrieved_stats[1]
 
     return jsonify({
         "url": url,
