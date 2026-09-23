@@ -1,5 +1,7 @@
 SWEET BACKEND PROJECT
 
+Utilizes Flask to easily create API routes and handle URL requests in Python.
+
 How to Run:
 Install Flask through this command:
  python -m pip install -r requirements.txt
