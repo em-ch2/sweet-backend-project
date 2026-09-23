@@ -48,12 +48,12 @@ def generate_code():
 
 @app.route("/shorten", methods=["POST"])
 def shorten_url():
-    userInput = request.get_json()
+    user_input = request.get_json()
 
-    if userInput is None or "url" not in userInput:
+    if user_input is None or "url" not in user_input:
         return jsonify({"error": "No URL provided"}), 400
 
-    url = userInput["url"]
+    url = user_input["url"]
 
     if not url.startswith("http://") and not url.startswith("https://"):
         return jsonify({"error": "Invalid URL"}), 400
